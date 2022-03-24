@@ -1,0 +1,18 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{modalTitle}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input type="text"
+           placeholder="Enter {{elementType}} name"
+           [(ngModel)]="itemName"
+           (keyup.enter)="addElement()" focus>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="addElement()">Create</button>
+  </div>
+</div>

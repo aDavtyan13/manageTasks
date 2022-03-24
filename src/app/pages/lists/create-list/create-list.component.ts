@@ -1,5 +1,4 @@
-import {BsModalRef} from 'ngx-bootstrap/modal';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {TasksService} from '../../../@core/services/tasks.service';
 
@@ -7,19 +6,10 @@ import {TasksService} from '../../../@core/services/tasks.service';
   selector: 'app-create-list',
   templateUrl: './create-list.component.html'
 })
-export class CreateListComponent implements OnInit {
-  public listName: string = '';
+export class CreateListComponent {
+  constructor(private tasksService: TasksService) {}
 
-  constructor(private tasksService: TasksService,
-              public modalRef: BsModalRef) {}
-
-  ngOnInit(): void {
-  }
-
-  public createList(): void {
-    this.modalRef.hide();
-    if (this.listName) {
-      this.tasksService.addItems(this.listName);
-    }
+  public createList(listName: string): void {
+    this.tasksService.addLists(listName);
   }
 }

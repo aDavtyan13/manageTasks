@@ -1,33 +1,49 @@
 import {EventEmitter, Injectable} from '@angular/core';
 
-import {IItem} from '../interfaces/IList';
+import {IListItem, ITaskItem} from '../interfaces/IList';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-  public item = {} as IItem;
-  public items: IItem[] = [];
-  public selectItemEvent = new EventEmitter<IItem>();
-  public updateItemEvent = new EventEmitter<IItem[]>();
+  public lists: IListItem[] = [];
+  public selectItemEvent = new EventEmitter<IListItem>();
+  public updateItemEvent = new EventEmitter<IListItem[]>();
 
-
-  public addItems(listName: string): void {
-    const element: IItem = {
-      id: this.items.length + 1,
+  public addLists(listName: string): void {
+    const element: IListItem = {
+      id: Date.now(),
       name: listName,
-      tasks: []
+      tasks: [],
+      selected: false,
+      isEditable: false
     };
-    this.items.push(element);
-    this.updateItemEvent.emit(this.items);
+    this.lists.push(element);
+    this.updateItemEvent.emit(this.lists);
   }
 
-  public getItems(): IItem[] {
-    return this.items;
+  public addTasks(selectedList: IListItem, taskName: string): void {
+    const taskElement: ITaskItem = {
+      id: Date.now(),
+      name: taskName
+    };
+
+    selectedList.tasks.push(taskElement);
   }
 
-  public updateItem(item: IItem, taskName: string, index: number): void {
-    item.tasks![index] = taskName;
-    this.getItems();
+  public removeItem(elements: any[], index: number): void {
+    if (elements[index].selected) {
+      const nextSelectedList = elements[index + 1] || elements[index - 1] || null;
+      this.selectElement(nextSelectedList);
+    }
+
+    elements.splice(index, 1);
+  }
+
+  private selectElement(listItem: IListItem): void {
+    if (listItem) {
+      listItem.selected = true;
+    }
+    this.selectItemEvent.emit(listItem);
   }
 }

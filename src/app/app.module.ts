@@ -7,6 +7,9 @@ import {AppComponent} from './app.component';
 import {ListsComponent} from './pages/lists/lists.component';
 import {TasksComponent} from './pages/tasks/tasks.component';
 import {FocusDirective} from './@theme/directives/focus.directive';
+import {OutClickDirective} from './@theme/directives/out-click.directive';
+import {EditComponent} from './@theme/components/common/edit/edit.component';
+import { ModalComponent } from './@theme/components/common/modal/modal.component';
 import {CreateListComponent} from './pages/lists/create-list/create-list.component';
 import {CreateTaskComponent} from './pages/tasks/create-task/create-task.component';
 
@@ -16,6 +19,9 @@ import {CreateTaskComponent} from './pages/tasks/create-task/create-task.compone
     ListsComponent,
     TasksComponent,
     FocusDirective,
+    ModalComponent,
+    EditComponent,
+    OutClickDirective,
     CreateListComponent,
     CreateTaskComponent
   ],
