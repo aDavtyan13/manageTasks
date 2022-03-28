@@ -8,11 +8,11 @@ import {IAlert} from '@core/models/alert.model';
   templateUrl: './alert.component.html'
 })
 export class AlertComponent {
+  @Output() confirmEvent: EventEmitter<void> = new EventEmitter<void>();
+
   @Input() alertItem!: IAlert;
   @Input() hasSaveBtn: boolean = true;
   @Input() saveBtnText: string = 'Ok';
-
-  @Output() confirmEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(public modalRef: BsModalRef) {
   }

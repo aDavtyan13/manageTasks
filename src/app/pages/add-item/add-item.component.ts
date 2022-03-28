@@ -9,16 +9,20 @@ import {TasksService} from '@core/services/tasks.service';
   templateUrl: './add-item.component.html'
 })
 export class AddItemComponent {
-  @Input() elementType: string = '';
-
   @Output() addElementEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  public itemName: string = '';
+  @Input() elementType: string = '';
 
   private taskNameEvent = new Subject<string>();
 
+  public itemName: string = '';
+
   constructor(public modalRef: BsModalRef,
               private tasksService: TasksService) {
+  }
+
+  private createListItem(listName: string): void {
+    this.tasksService.addLists(listName);
   }
 
   public addElement(): void {
@@ -36,10 +40,6 @@ export class AddItemComponent {
       this.itemName = '';
       this.modalRef.hide();
     }
-  }
-
-  private createListItem(listName: string): void {
-    this.tasksService.addLists(listName);
   }
 
   public createTask(taskName: string): void {

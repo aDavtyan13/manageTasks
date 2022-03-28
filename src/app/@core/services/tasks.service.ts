@@ -7,8 +7,15 @@ import {IListItem, ITaskItem} from 'app/@core/interfaces/IList';
 })
 export class TasksService {
   public lists: IListItem[] = [];
-  public selectItemEvent = new EventEmitter<IListItem>();
-  public updateItemEvent = new EventEmitter<IListItem>();
+  public selectItemEvent: EventEmitter<IListItem> = new EventEmitter<IListItem>();
+  public updateItemEvent: EventEmitter<IListItem> = new EventEmitter<IListItem>();
+
+  private selectElement(listItem: IListItem): void {
+    if (listItem) {
+      listItem.selected = true;
+    }
+    this.selectItemEvent.emit(listItem);
+  }
 
   public addLists(listName: string): void {
     const element: IListItem = {
@@ -51,12 +58,5 @@ export class TasksService {
     }
 
     elements.splice(index, 1);
-  }
-
-  private selectElement(listItem: IListItem): void {
-    if (listItem) {
-      listItem.selected = true;
-    }
-    this.selectItemEvent.emit(listItem);
   }
 }

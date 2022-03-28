@@ -6,14 +6,14 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   templateUrl: './modal.component.html'
 })
 export class ModalComponent {
+  @Output() saveBtnEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() cancelBtnEvent: EventEmitter<void> = new EventEmitter<void>();
+
   @Input() modalTitle: string = '';
   @Input() saveBtnText: string = '';
   @Input() hasSaveBtn: boolean = true;
   @Input() withModalHeader: boolean = true;
   @Input() cancelBtnText: string = 'Cancel';
-
-  @Output() saveBtnEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() cancelBtnEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public modalRef: BsModalRef) {
   }

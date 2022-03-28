@@ -10,12 +10,13 @@ import {AlertComponent} from '@theme/components/partials/alert/alert.component';
   templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit {
-  public elementName?: string;
-  private currentSelected: any;
-
   @Input() index!: number;
   @Input() elements!: any;
   @Input() isInList: boolean = false;
+
+  private currentSelected: any;
+
+  public elementName?: string;
 
   constructor(private tasksService: TasksService,
               private modalService: BsModalService) {
