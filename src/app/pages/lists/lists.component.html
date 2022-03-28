@@ -1,11 +1,15 @@
 <div class="main-block--lists--content">
-  <h4 class="main-block--header">Lists</h4>
+  <div class="d-flex justify-content-between">
+    <h4 class="main-block--header">Lists</h4>
+    <i class="fa-solid fa-circle-info info-icon" (click)="showInfo()"></i>
+  </div>
   <div class="lists--block">
     <label *ngFor="let list of listItems; let i = index">
       <input type="radio" name="item" [checked]="list?.selected" (change)="selectItem(list)">
       <div class="list-item">
         <p>{{list?.name}}</p>
         <app-edit [index]="i"
+                  [isInList]="true"
                   [elements]="listItems"></app-edit>
       </div>
     </label>

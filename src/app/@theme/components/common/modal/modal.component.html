@@ -1,18 +1,15 @@
 <div>
-  <div class="modal-header">
+  <div class="modal-header" *ngIf="withModalHeader">
     <h4 class="modal-title pull-left">{{modalTitle}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
   <div class="modal-body">
-    <input type="text"
-           placeholder="Enter {{elementType}} name"
-           [(ngModel)]="itemName"
-           (keyup.enter)="addElement()" focus>
+    <ng-content></ng-content>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="modalRef.hide()">Cancel</button>
-    <button type="button" class="btn btn-success" (click)="addElement()">Create</button>
+    <button *ngIf="hasSaveBtn" type="button" class="btn btn-default" (click)="cancelBtnFn()">{{cancelBtnText}}</button>
+    <button type="button" class="btn btn-success" (click)="saveBtnFn()">{{saveBtnText}}</button>
   </div>
 </div>

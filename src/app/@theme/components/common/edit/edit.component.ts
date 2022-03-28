@@ -1,6 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 
-import {TasksService} from '../../../../@core/services/tasks.service';
+import {TasksService} from '@core/services/tasks.service';
+import {AlertConstant, AlertEnum} from '@core/models/alert.model';
+import {BsModalRef, BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
+import {AlertComponent} from '@theme/components/partials/alert/alert.component';
 
 @Component({
   selector: 'app-edit',
@@ -12,8 +15,10 @@ export class EditComponent implements OnInit {
 
   @Input() index!: number;
   @Input() elements!: any;
+  @Input() isInList: boolean = false;
 
-  constructor(private tasksService: TasksService) {
+  constructor(private tasksService: TasksService,
+              private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -26,9 +31,24 @@ export class EditComponent implements OnInit {
     this.currentSelected.isEditable = true;
   }
 
+  public duplicateItem(event: Event): void {
+    event.preventDefault();
+    this.tasksService.addList(this.elements[this.index].name, this.elements[this.index]);
+  }
+
   public removeElement(event: Event): void {
     event.preventDefault();
-    this.tasksService.removeItem(this.elements, this.index);
+    const config: ModalOptions = {
+      class: 'modal-sm',
+      initialState: {
+        saveBtnText: 'Delete',
+        alertItem: AlertConstant[AlertEnum.WARNING],
+      }
+    }
+    const modalRef: BsModalRef = this.modalService.show(AlertComponent, config);
+    modalRef.content.confirmEvent.subscribe(() => {
+      this.tasksService.removeItem(this.elements, this.index);
+    })
   }
 
   public saveElement(): void {

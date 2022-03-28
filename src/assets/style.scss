@@ -107,6 +107,14 @@ ul {
       border-right: 1px solid darkslategrey;
     }
 
+    &--lists--content {
+      .info-icon {
+        font-size: 25px;
+        color: #1E92F4;
+        cursor: pointer;
+      }
+    }
+
     &--tasks {
       width: 55%;
 
@@ -217,5 +225,23 @@ ul {
     &:checked ~ .list-item {
       background-color: rgba(darkslategray, .1);
     }
+  }
+}
+
+.confirmation-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 180px;
+  text-align: center;
+
+  &--icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+
+  &--text {
+    margin-bottom: 0;
   }
 }

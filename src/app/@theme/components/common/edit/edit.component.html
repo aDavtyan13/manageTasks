@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center justify-content-between"
      out-click
      (outClickEvent)="elements[index].isEditable = $event">
-  <div *ngIf="elements[index].isEditable"
+  <div *ngIf="elements[index]?.isEditable"
        class="tasks--block--item--edit">
     <input type="text"
            [(ngModel)]="elementName" focus
@@ -9,6 +9,8 @@
     <i class="fas fa-check" (click)="saveElement()"></i>
   </div>
   <div class="d-flex align-items-center">
+    <i *ngIf="isInList" class="fa-solid fa-clone me-2 tasks--block--item--icon"
+       (click)="duplicateItem($event)"></i>
     <i class="fas fa-edit me-2 tasks--block--item--icon"
        (click)="editElement($event)"></i>
     <i class="fa-solid fa-trash-can tasks--block--item--icon"

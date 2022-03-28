@@ -1,0 +1,10 @@
+<app-modal [modalTitle]="'Create a new ' + elementType"
+           [cancelBtnText]="'Cancel'"
+           [saveBtnText]="'Create'"
+           (cancelBtnEvent)="modalRef.hide()"
+           (saveBtnEvent)="addElement()">
+  <input type="text"
+         placeholder="Enter {{elementType}} name"
+         [(ngModel)]="itemName"
+         (keyup.enter)="addElement()" focus>
+</app-modal>

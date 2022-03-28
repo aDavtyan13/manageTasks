@@ -1,0 +1,12 @@
+<app-modal [saveBtnText]="saveBtnText"
+           [withModalHeader]="false"
+           [hasSaveBtn]="hasSaveBtn"
+           (cancelBtnEvent)="modalRef.hide()"
+           (saveBtnEvent)="approveConfirmation()">
+  <div class="confirmation-block">
+    <span class="fa-solid fa-{{alertItem?.icon}} confirmation-block--icon" [ngStyle]="{'color': alertItem?.iconColor}"></span>
+    <h3>{{alertItem?.header}}</h3>
+    <p class="confirmation-block--text">{{alertItem?.text}}</p>
+  </div>
+</app-modal>
+

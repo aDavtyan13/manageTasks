@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 
-import {IListItem, ITaskItem} from '../interfaces/IList';
+import {IListItem, ITaskItem} from 'app/@core/interfaces/IList';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {IListItem, ITaskItem} from '../interfaces/IList';
 export class TasksService {
   public lists: IListItem[] = [];
   public selectItemEvent = new EventEmitter<IListItem>();
-  public updateItemEvent = new EventEmitter<IListItem[]>();
+  public updateItemEvent = new EventEmitter<IListItem>();
 
   public addLists(listName: string): void {
     const element: IListItem = {
@@ -18,8 +18,22 @@ export class TasksService {
       selected: false,
       isEditable: false
     };
+
     this.lists.push(element);
-    this.updateItemEvent.emit(this.lists);
+    this.updateItemEvent.emit(element);
+  }
+
+  public addList(listName: string, listItem?: IListItem): void {
+    const element: IListItem = {
+      id: Date.now(),
+      name: listName,
+      tasks: listItem ? listItem.tasks : [],
+      selected: false,
+      isEditable: false
+    };
+
+    this.lists.push(element);
+    this.updateItemEvent.emit(element);
   }
 
   public addTasks(selectedList: IListItem, taskName: string): void {
@@ -27,7 +41,6 @@ export class TasksService {
       id: Date.now(),
       name: taskName
     };
-
     selectedList.tasks.push(taskElement);
   }
 
